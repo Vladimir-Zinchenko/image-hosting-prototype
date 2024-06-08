@@ -1,8 +1,8 @@
 <nav class="navbar bg-body-tertiary border-bottom">
     <div class="container-fluid">
-        <h1 class="navbar-brand mb-0 text-center">{{ config('app.name') }}</h1>
-        <button class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#uploadModal">
+        <a class="navbar-brand mb-0 h1" href="{{ url('/')  }}">{{ config('app.name') }}</a>
+        <a class="btn btn-outline-success" type="button" href="{{ url('/upload') }}">
             Upload images
-        </button>
+        </a>
     </div>
 </nav>
