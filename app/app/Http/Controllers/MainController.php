@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use App\Utils\SortQuery;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 /**
@@ -19,13 +19,10 @@ class MainController extends Controller
      */
     public function index(Request $request): View
     {
-        $sorts = explode(',', $request->input('sort', 'uploaded_at'));
+        $sorts = SortQuery::parse($request->input('sort'));
         $query = Image::query();
 
-        foreach ($sorts as $sortColumn) {
-            $sortDirection = Str::startsWith($sortColumn, '-') ? 'desc' : 'asc';
-            $sortColumn = ltrim($sortColumn, '-');
-
+        foreach ($sorts as $sortColumn => $sortDirection) {
             $query->orderBy($sortColumn, $sortDirection);
         }
 

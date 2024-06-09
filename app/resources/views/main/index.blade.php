@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div>
+    <div class="pb-3">
         <x-sort-link title="Uploaded" column="uploaded_at" />
+        <x-sort-link title="Name" column="source_filename" />
     </div>
     <div class="row">
     @foreach ($images as $image)
