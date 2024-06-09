@@ -70,4 +70,13 @@ class Image extends Model
     {
         return Storage::disk('public')->url(self::UPLOAD_DIR . '/' . $this->filename);
     }
+
+    /**
+     * @return string
+     */
+    public function getZipUrl(): string
+    {
+        return url('/download', ['id' => $this->id]);
+//        return Storage::disk('public')->url(self::UPLOAD_DIR . '/' . $this->filename);
+    }
 }
