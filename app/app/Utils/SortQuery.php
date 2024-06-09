@@ -23,11 +23,11 @@ class SortQuery
     ];
 
     /**
-     * @param string $sortValue
+     * @param string|null $sortValue
      *
      * @return array
      */
-    public static function parse(string $sortValue): array
+    public static function parse(?string $sortValue): array
     {
         $parsedResult = [];
 

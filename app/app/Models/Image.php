@@ -6,11 +6,17 @@ use Akaunting\Sortable\Traits\Sortable;
 use DateTime;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 use Rolandstarke\Thumbnail\Facades\Thumbnail;
 
 /**
  * Class Image
+ *
+ * @property int $id
+ * @property DateTime $uploaded_at
+ * @property string $source_filename
+ * @property string $filename
  */
 class Image extends Model
 {
@@ -26,6 +32,10 @@ class Image extends Model
 
         static::creating(function (Image $model) {
             $model->uploaded_at = new DateTime();
+        });
+
+        static::addGlobalScope('order', function (Builder $query) {
+            $query->orderBy('uploaded_at', 'desc');
         });
     }
 

@@ -18,7 +18,7 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">{{ $image->source_filename  }}</h5>
-                            <p class="card-text"><a href="#">download as *.zip</a></p>
+                            <p class="card-text"><a href="{{ url('/download', ['id' => $image->id])  }}">download as *.zip</a></p>
                             <p class="card-text"><small class="text-body-secondary">{{ $image->uploaded_at  }}</small></p>
                         </div>
                     </div>
