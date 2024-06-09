@@ -13,12 +13,15 @@ export default function () {
     const uploadZone = new Dropzone(dropzoneContainer, {
         url: form.getAttribute('action'),
         maxFilesize: 5,
+        parallelUploads: 5,
         autoProcessQueue: false,
         acceptedFiles: '.jpeg,.jpg,.png',
         addRemoveLinks: true,
         timeout: 120000,
+        uploadMultiple: true,
         success: function (file, response) {
-            console.log(response);
+            // console.log(file);
+            window.location.href = '/';
         },
         error: function (file, response) {
             return false;
@@ -26,7 +29,6 @@ export default function () {
     });
 
     uploadZone.on('sending', (file, xhr, formData) => {
-        console.log(csrf.value);
         formData.append('_token', csrf.value);
     });
 

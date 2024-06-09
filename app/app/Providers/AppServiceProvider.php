@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\View\Component\SortLink;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Paginator::useBootstrapFive();
+        Blade::component(SortLink::class, 'sort-link');
     }
 }

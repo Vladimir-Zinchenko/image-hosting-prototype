@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
+use App\Http\Requests\UploadValidationRequest;
+use App\Services\SaveUploadedImageService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 
 /**
@@ -11,6 +12,8 @@ use Illuminate\View\View;
  */
 class UploadController extends Controller
 {
+    public function __construct(private readonly SaveUploadedImageService $uploadedImageService) {}
+
     /**
      * @return View
      */
@@ -19,9 +22,19 @@ class UploadController extends Controller
         return view('upload.index');
     }
 
-    public function store(Request $request): Redirector
+    /**
+     * @param UploadValidationRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function store(UploadValidationRequest $request): JsonResponse
     {
-//        dd($request->all());
-        return redirect('/');
+        $images = $request->file('file');
+
+        foreach ($images as $image) {
+            $this->uploadedImageService->save($image);
+        }
+
+        return response()->json(['OK']);
     }
 }
