@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Akaunting\Sortable\Traits\Sortable;
 use DateTime;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
